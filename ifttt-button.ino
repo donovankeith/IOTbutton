@@ -12,7 +12,7 @@
 #define USE_SERIAL Serial
 const int LED_PIN = 14; // this is the LED pin
 
-#define IFTTT_URL "http://maker.ifttt.com/trigger/button_pressed/with/key/xxxxxxxxxxxxxxxxx"
+#define IFTTT_URL "http://maker.ifttt.com/trigger/button_pressed/with/key/xxxxxxxxxxxxxxxxxxxxxx"
 
 void setupWifi(void);
 
@@ -42,7 +42,14 @@ void loop() {
       }
     }
     
-    delay(10000); // wait for 10 seconds for the next event
+    delay(2000); // wait for 10 seconds for the next event
+    digitalWrite(LED_PIN, LOW); // turn off the LED
+    WiFi.forceSleepBegin();
+    WiFi.disconnect();
+    while(1)
+    {
+      __asm__("nop");
+    }
 }
 
 
@@ -74,7 +81,7 @@ bool postToIfttt()
 
 void setupWifi()
 {
-      WiFi.begin("xxxxxxxxxxx", "xxxxxxxxxxxxx");
+      WiFi.begin("xxxxxxxxxxxxxx", "xxxxxxxxxxxxxxx");
   
     while (WiFi.status() != WL_CONNECTED) {
       delay(500);
